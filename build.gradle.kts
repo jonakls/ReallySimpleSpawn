@@ -1,6 +1,5 @@
 plugins {
     kotlin("jvm") version ("1.9.21")
-    id("com.github.johnrengelman.shadow") version ("8.1.1")
     id("net.minecrell.plugin-yml.paper") version ("0.6.0")
 }
 
@@ -15,8 +14,10 @@ repositories {
 
 dependencies {
     compileOnly("io.papermc.paper:paper-api:1.20.4-R0.1-SNAPSHOT")
-    implementation("team.unnamed:inject:2.0.1")
-    implementation("dev.triumphteam:triumph-cmd-bukkit:2.0.0-SNAPSHOT")
+    compileOnly("team.unnamed:inject:2.0.1")
+    compileOnly("dev.triumphteam:triumph-cmd-bukkit:2.0.0-SNAPSHOT")
+    compileOnly("org.spongepowered:configurate-gson:4.1.2")
+    compileOnly("org.spongepowered:configurate-extra-kotlin:4.1.2")
 
     testImplementation("org.jetbrains.kotlin:kotlin-test")
 }
@@ -29,25 +30,19 @@ kotlin {
 }
 
 tasks {
-    shadowJar {
+    jar {
         archiveBaseName.set("ReallySimpleSpawn")
-
-        listOf(
-            "team.unnamed.inject",
-            "dev.triumphteam.triumphcmd",
-        ).forEach {
-            relocate(it, "top.jonakls.rsspawn.libs.${it}")
-        }
     }
 }
 
 paper {
     main = "top.jonakls.rsspawn.ReallySimpleSpawn"
+    loader = "top.jonakls.rsspawn.ReallySimpleSpawnLoader"
     name = findProperty("plugin.name").toString()
     version = findProperty("plugin.version").toString()
     author = findProperty("plugin.authors").toString()
     description = findProperty("plugin.description").toString()
 
-    apiVersion = "1.17"
+    apiVersion = "1.20"
     website = ""
 }

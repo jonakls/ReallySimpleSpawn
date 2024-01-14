@@ -3,6 +3,7 @@ package top.jonakls.rsspawn.inject
 import team.unnamed.inject.AbstractModule
 import top.jonakls.rsspawn.ReallySimpleSpawn
 import top.jonakls.rsspawn.inject.command.CommandModule
+import top.jonakls.rsspawn.inject.configuration.ConfigurationModule
 
 class MainModule(
     private val plugin: ReallySimpleSpawn
@@ -13,5 +14,6 @@ class MainModule(
             .toInstance(this.plugin)
 
         this.install(CommandModule())
+        this.install(ConfigurationModule())
     }
 }

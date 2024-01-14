@@ -9,6 +9,8 @@ class ReallySimpleSpawn : JavaPlugin() {
     override fun onEnable() {
         Injector.create(MainModule(this))
             .injectMembers(this)
+
+        logger.info("Hello, world!")
     }
 
     override fun onDisable() {
